@@ -30,6 +30,7 @@ const getMovieDetail = (id) => {
             <div class="studios"></div>
         </aside>
         <div class="detail-container">
+            <a class="link-back" href="./index.html">< Retour</a>
             <h1 class="title-movie">${data.title}</h1>
             <h2 class="title-movie-original">${data.original_title}</h2>
             <p class="description">${data.overview}</p>

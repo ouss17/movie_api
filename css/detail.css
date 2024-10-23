@@ -39,11 +39,17 @@
   justify-content: space-around;
   }
 
+  .link-back {
+    text-decoration: none;
+    color: #bf1e2d;
+  }
+
   .detail-movie {
     border-right: 1px solid;
     border-bottom: 1px solid;
     height: 100vh;
     width: 300px;
+    overflow-y: scroll;
   }
 
   .logo {
@@ -93,4 +99,32 @@
   .title-third {
     color: #bf1e2d;
     margin-bottom: 25px;
+  }
+
+  @media (max-width : 1482px ) {
+    .detail-container {
+        width: 60%;
+      }
+  }
+
+  @media (max-width : 744px ) {
+    .detail-container {
+        width: 80%;
+      }
+      .detail-movie {
+        border: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80%;
+        margin: 0 auto;
+        height: auto;
+      }
+  }
+
+  @media (max-width : 300px ) {
+    .detail-movie {
+        width: 100%;
+      }
+
   }
