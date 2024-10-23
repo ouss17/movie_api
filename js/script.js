@@ -38,6 +38,7 @@ const renderNews = (func, section) => {
       if (i < 5) {
         let text = `
             <div class="card-container">
+            <a href="./detail.html?id=${element.id}">
             <img src="https://media.themoviedb.org/t/p/w220_and_h330_face${
               element["poster_path"]
             }" alt=${element["original_title"]} />
@@ -51,6 +52,7 @@ const renderNews = (func, section) => {
           "vote_average"
         ].toFixed(1)}</span>
             </div>
+            </a>
             </div>
             `;
         section.insertAdjacentHTML("beforeend", text);
@@ -59,19 +61,19 @@ const renderNews = (func, section) => {
             document.querySelector(`#movie${element.id}`).style.color = "green";
             document.querySelector(`#movie${element.id}`).style.borderColor =
               "green";
-            console.log(element.title, ">");
+            // console.log(element.title, ">");
             break;
           case parseFloat(element["vote_average"]) < 5:
             document.querySelector(`#movie${element.id}`).style.color = "red";
             document.querySelector(`#movie${element.id}`).style.borderColor =
               "red";
-            console.log(element.title, "<");
+            // console.log(element.title, "<");
             break;
           default:
             document.querySelector(`#movie${element.id}`).style.color = "black";
             document.querySelector(`#movie${element.id}`).style.borderColor =
               "black";
-            console.log(element.title, "=");
+          // console.log(element.title, "=");
         }
       }
     });

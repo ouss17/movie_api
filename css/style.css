@@ -41,10 +41,20 @@
     flex-wrap: wrap;
   }
 
+  .card-container a{
+    text-decoration: none;
+  }
+
   .card-container {
     cursor: pointer;
     border: 1px solid grey;
     border-radius: 5px;
+    margin-bottom: 30px;
+    box-shadow: 20px 20px 10px 0px rgba(0,0,0,0.05);
+  }
+
+  .card-container a {
+    text-decoration: none;
   }
 
   .footer-card {
@@ -52,6 +62,10 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+  }
+
+  .title-movie {
+    color: black;
   }
 
   .score {
