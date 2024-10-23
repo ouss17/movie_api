@@ -14,7 +14,7 @@ const fetchApp = (url, options = {}) => {
 
 const getMovies = () => {
   return fetchApp(
-    "https://api.themoviedb.org/3/movie/popular?language=fr-FR&page=1",
+    "https://api.themoviedb.org/3/movie/upcoming?language=fr-FR&page=1",
     options
   );
   // .then((res) => console.log(res))
@@ -31,9 +31,9 @@ const getRatedMovies = () => {
 const section = document.querySelector(".section");
 const sectionNews = document.querySelector(".section-news");
 const sectionRated = document.querySelector(".section-rated");
-const renderNews = () => {
-  getMovies().then((res) => {
-    console.log(res);
+const renderNews = (func, section) => {
+  func().then((res) => {
+    // console.log(res);
     res.results.forEach((element, i) => {
       if (i < 5) {
         let text = `
@@ -53,7 +53,7 @@ const renderNews = () => {
             </div>
             </div>
             `;
-        sectionNews.insertAdjacentHTML("beforeend", text);
+        section.insertAdjacentHTML("beforeend", text);
         switch (true) {
           case parseFloat(element["vote_average"]) > 7:
             document.querySelector(`#movie${element.id}`).style.color = "green";
@@ -78,4 +78,5 @@ const renderNews = () => {
   });
 };
 
-renderNews();
+renderNews(getMovies, sectionNews);
+renderNews(getRatedMovies, sectionRated);
