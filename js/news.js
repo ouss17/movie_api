@@ -12,9 +12,9 @@ const fetchApp = (url, options = {}) => {
   return fetch(url, options).then((res) => res.json());
 };
 
-const getMovies = () => {
+const getMovies = (page) => {
   return fetchApp(
-    "https://api.themoviedb.org/3/movie/upcoming?language=fr-FR&page=1",
+    `https://api.themoviedb.org/3/movie/upcoming?language=fr-FR&page=${page}`,
     options
   );
 };
@@ -23,7 +23,12 @@ const section = document.querySelector(".section");
 const sectionNews = document.querySelector(".section-news");
 
 const renderNews = (func, section) => {
-  func().then((res) => {
+  const queryString = window.location.search;
+  // console.log(queryString);
+  const urlParams = new URLSearchParams(queryString);
+  const page = urlParams.get("page");
+  // console.log(page);
+  func(page).then((res) => {
     // console.log(res);
     res.results.forEach((element, i) => {
       let text = `
@@ -66,6 +71,38 @@ const renderNews = (func, section) => {
         // console.log(element.title, "=");
       }
     });
+    let footerHtml = "";
+    if (parseInt(page) === res.total_pages) {
+      footerHtml = `
+    <div class="footer-section">
+      <a href="./news.html?page=${
+        parseInt(page) - 1
+      }" class="navig prec">< Prec</a>
+    </div>
+    `;
+    } else if (parseInt(page) === 1) {
+      footerHtml = `
+      <div class="footer-section">
+        <a href="./news.html?page=${
+          parseInt(page) + 1
+        }" class="navig suiv">Suiv ></a>
+      </div>
+      `;
+    } else {
+      footerHtml = footerHtml = `
+      <div class="footer-section">
+        <a href="./news.html?page=${
+          parseInt(page) - 1
+        }" class="navig prec">< Prec</a>
+        <a href="./news.html?page=${
+          parseInt(page) + 1
+        }" class="navig suiv">Suiv ></a>
+      </div>
+      `;
+    }
+    document
+      .querySelector(".container")
+      .insertAdjacentHTML("beforeend", footerHtml);
   });
 };
 

@@ -20,8 +20,8 @@
 
 #search {
   position: absolute;
-  right: 60px;
-  top: 148px;
+  right: 40%;
+  top: 200px;
   border-radius: 15px;
   width: 15%;
   padding: 5px 10px;
@@ -87,20 +87,21 @@
 
 .list-search {
   position: absolute;
-  right: 60px;
+  right: 40%;
   background: white;
   width: 15%;
   border: 1px solid black;
   border-top-width: 1px;
   border-top-style: solid;
   border-top-color: black;
-  top: 177px;
+  top: 229px;
   padding: 5px 10px;
   border-top: none;
   border-radius: 0 0px 15px 15px;
   display: none;
   list-style-type: none;
   overflow-y: scroll;
+  max-height: 500px;
 }
 
 .list-element a {
@@ -116,4 +117,20 @@
 .list-element img {
   width: 50px;
   margin-right: auto;
+}
+
+.footer-section a {
+  text-decoration: none;
+  color: black;
+}
+
+.footer-section a:hover {
+  color: #bf1e2d;
+}
+
+.footer-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 30px;
 }

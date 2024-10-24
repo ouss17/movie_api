@@ -102,6 +102,18 @@ const GetAllMovies = async () => {
         `https://api.themoviedb.org/3/movie/popular?language=fr-FR&page=5`,
         options
       ),
+      fetchApp(
+        `https://api.themoviedb.org/3/movie/popular?language=fr-FR&page=6`,
+        options
+      ),
+      fetchApp(
+        `https://api.themoviedb.org/3/movie/popular?language=fr-FR&page=7`,
+        options
+      ),
+      fetchApp(
+        `https://api.themoviedb.org/3/movie/popular?language=fr-FR&page=8`,
+        options
+      ),
     ]);
     // console.log(prom);
     let allData = [
@@ -110,6 +122,9 @@ const GetAllMovies = async () => {
       ...prom[2].results,
       ...prom[3].results,
       ...prom[4].results,
+      ...prom[5].results,
+      ...prom[6].results,
+      ...prom[7].results,
     ];
     // console.log(allData);
     return allData;
@@ -122,8 +137,8 @@ const input = document.querySelector("#search");
 input.addEventListener("input", () => {
   let load = true;
 
-  console.log(input.value);
-  if (input.value.length >= 3) {
+  // console.log(input.value);
+  if (input.value.length >= 2) {
     // console.log("start counting");
     let inputLast = input.value;
     setTimeout(() => {
@@ -144,21 +159,28 @@ input.addEventListener("input", () => {
           });
           document.querySelector(".list-search").innerHTML = "";
 
-          filter.forEach((el) => {
-            let htmlSearch =
-              `
+          let htmlSearch =
+            filter.length > 0
+              ? filter.forEach((el) => {
+                  `
             <li class="list-element">
               <a href="./detail.html?id=${el.id}">
                 <img src="https://media.themoviedb.org/t/p/w220_and_h330_face${el["poster_path"]}"
                 <span>${el.title}</span>
               </a>
             </li>
-            ` || "<li>Aucun film correspondant</li>";
+            `;
 
-            document
-              .querySelector(".list-search")
-              .insertAdjacentHTML("beforeend", htmlSearch);
-          });
+                  document
+                    .querySelector(".list-search")
+                    .insertAdjacentHTML("beforeend", htmlSearch);
+                })
+              : document
+                  .querySelector(".list-search")
+                  .insertAdjacentHTML(
+                    "beforeend",
+                    "<li>Aucun film correspondant</li>"
+                  );
           // console.log(filter);
         });
       }
@@ -170,6 +192,9 @@ input.addEventListener("input", () => {
         .querySelector(".list-search")
         .insertAdjacentHTML("beforeend", `<li>patientez...</li>`);
     }
+  } else {
+    document.querySelector(".list-search").style.display = "none";
+    document.querySelector(".list-search").innerHTML = "";
   }
 });
 
