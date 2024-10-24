@@ -79,6 +79,99 @@ const renderNews = (func, section) => {
     });
   });
 };
+const GetAllMovies = async () => {
+  try {
+    let prom = await Promise.all([
+      fetchApp(
+        `https://api.themoviedb.org/3/movie/popular?language=fr-FR&page=1`,
+        options
+      ),
+      fetchApp(
+        `https://api.themoviedb.org/3/movie/popular?language=fr-FR&page=2`,
+        options
+      ),
+      fetchApp(
+        `https://api.themoviedb.org/3/movie/popular?language=fr-FR&page=3`,
+        options
+      ),
+      fetchApp(
+        `https://api.themoviedb.org/3/movie/popular?language=fr-FR&page=4`,
+        options
+      ),
+      fetchApp(
+        `https://api.themoviedb.org/3/movie/popular?language=fr-FR&page=5`,
+        options
+      ),
+    ]);
+    // console.log(prom);
+    let allData = [
+      ...prom[0].results,
+      ...prom[1].results,
+      ...prom[2].results,
+      ...prom[3].results,
+      ...prom[4].results,
+    ];
+    // console.log(allData);
+    return allData;
+  } catch (error) {
+    console.log(error);
+  }
+};
+const input = document.querySelector("#search");
+
+input.addEventListener("input", () => {
+  let load = true;
+
+  console.log(input.value);
+  if (input.value.length >= 3) {
+    // console.log("start counting");
+    let inputLast = input.value;
+    setTimeout(() => {
+      if (inputLast === input.value) {
+        load = false;
+        // console.log("same value");
+        GetAllMovies().then((data) => {
+          // console.log(data, "data");
+          let filter = data.filter((el) => {
+            return (
+              el.title
+                .toLowerCase()
+                .includes(input.value.toLowerCase().trim()) ||
+              el.original_title
+                .toLowerCase()
+                .includes(input.value.toLowerCase().trim())
+            );
+          });
+          document.querySelector(".list-search").innerHTML = "";
+
+          filter.forEach((el) => {
+            let htmlSearch =
+              `
+            <li class="list-element">
+              <a href="./detail.html?id=${el.id}">
+                <img src="https://media.themoviedb.org/t/p/w220_and_h330_face${el["poster_path"]}"
+                <span>${el.title}</span>
+              </a>
+            </li>
+            ` || "<li>Aucun film correspondant</li>";
+
+            document
+              .querySelector(".list-search")
+              .insertAdjacentHTML("beforeend", htmlSearch);
+          });
+          // console.log(filter);
+        });
+      }
+    }, 2000);
+    if (load) {
+      document.querySelector(".list-search").style.display = "block";
+      document.querySelector(".list-search").innerHTML = "";
+      document
+        .querySelector(".list-search")
+        .insertAdjacentHTML("beforeend", `<li>patientez...</li>`);
+    }
+  }
+});
 
 renderNews(getMovies, sectionNews);
 renderNews(getRatedMovies, sectionRated);
