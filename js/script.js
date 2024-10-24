@@ -158,11 +158,10 @@ input.addEventListener("input", () => {
             );
           });
           document.querySelector(".list-search").innerHTML = "";
-
-          let htmlSearch =
-            filter.length > 0
-              ? filter.forEach((el) => {
-                  `
+          filter.length > 0
+            ? filter.forEach((el) => {
+                let htmlSearch = "";
+                htmlSearch = `
             <li class="list-element">
               <a href="./detail.html?id=${el.id}">
                 <img src="https://media.themoviedb.org/t/p/w220_and_h330_face${el["poster_path"]}"
@@ -171,16 +170,16 @@ input.addEventListener("input", () => {
             </li>
             `;
 
-                  document
-                    .querySelector(".list-search")
-                    .insertAdjacentHTML("beforeend", htmlSearch);
-                })
-              : document
+                document
                   .querySelector(".list-search")
-                  .insertAdjacentHTML(
-                    "beforeend",
-                    "<li>Aucun film correspondant</li>"
-                  );
+                  .insertAdjacentHTML("beforeend", htmlSearch);
+              })
+            : document
+                .querySelector(".list-search")
+                .insertAdjacentHTML(
+                  "beforeend",
+                  "<li>Aucun film correspondant</li>"
+                );
           // console.log(filter);
         });
       }
