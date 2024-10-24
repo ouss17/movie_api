@@ -12,9 +12,9 @@ const fetchApp = (url, options = {}) => {
   return fetch(url, options).then((res) => res.json());
 };
 
-const getMovies = () => {
+const getMovies = (page) => {
   return fetchApp(
-    "https://api.themoviedb.org/3/movie/top_rated?language=fr-FR&page=1",
+    `https://api.themoviedb.org/3/movie/top_rated?language=fr-FR&page=${page}`,
     options
   );
 };
@@ -23,7 +23,11 @@ const section = document.querySelector(".section");
 const sectionRated = document.querySelector(".section-rated");
 
 const renderNews = (func, section) => {
-  func().then((res) => {
+  const queryString = window.location.search;
+  // console.log(queryString);
+  const urlParams = new URLSearchParams(queryString);
+  const page = urlParams.get("page");
+  func(page).then((res) => {
     // console.log(res);
     res.results.forEach((element, i) => {
       let text = `
