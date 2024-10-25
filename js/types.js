@@ -82,7 +82,7 @@ const renderNews = (func, section) => {
     if (parseInt(page) === res.total_pages) {
       footerHtml = `
     <div class="footer-section">
-      <a href="./news.html?page=${
+      <a href="./types.html?type=${type}&page=${
         parseInt(page) - 1
       }" class="navig prec">< Prec</a>
     </div>
@@ -90,26 +90,27 @@ const renderNews = (func, section) => {
     } else if (parseInt(page) === 1) {
       footerHtml = `
       <div class="footer-section">
-        <a href="./news.html?page=${
-          parseInt(page) + 1
-        }" class="navig suiv">Suiv ></a>
+        <a href="./types.html?type=${type}&page=${
+        parseInt(page) + 1
+      }" class="navig suiv">Suiv ></a>
       </div>
       `;
     } else {
       footerHtml = footerHtml = `
       <div class="footer-section">
-        <a href="./news.html?page=${
-          parseInt(page) - 1
-        }" class="navig prec">< Prec</a>
-        <a href="./news.html?page=${
-          parseInt(page) + 1
-        }" class="navig suiv">Suiv ></a>
+        <a href="./types.html?type=${type}&page=${
+        parseInt(page) - 1
+      }" class="navig prec">< Prec</a>
+        <a href="./types.html?type=${type}&page=${
+        parseInt(page) + 1
+      }" class="navig suiv">Suiv ></a>
       </div>
       `;
     }
     document
       .querySelector(".container")
       .insertAdjacentHTML("beforeend", footerHtml);
+    // document.querySelector(".navig").style.color = "#ffe09f";
   });
 };
 
