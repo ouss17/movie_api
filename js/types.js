@@ -12,23 +12,30 @@ const fetchApp = (url, options = {}) => {
   return fetch(url, options).then((res) => res.json());
 };
 
-const getMovies = (page) => {
+const getMovies = (page, type) => {
   return fetchApp(
-    `https://api.themoviedb.org/3/movie/upcoming?language=fr-FR&page=${page}`,
+    `https://api.themoviedb.org/3/movie/${type}?language=fr-FR&page=${page}`,
     options
   );
 };
 
 const section = document.querySelector(".section");
-const sectionNews = document.querySelector(".section-news");
-
 const renderNews = (func, section) => {
   const queryString = window.location.search;
   // console.log(queryString);
   const urlParams = new URLSearchParams(queryString);
+
   const page = urlParams.get("page");
+  let type = urlParams.get("type");
+  if (type == "news") {
+    document.querySelector(".title-main").innerHTML = "Nouveautés";
+    type = "upcoming";
+  } else {
+    document.querySelector(".title-main").innerHTML = "Les mieux notés";
+    type = "top_rated";
+  }
   // console.log(page);
-  func(page).then((res) => {
+  func(page, type).then((res) => {
     // console.log(res);
     res.results.forEach((element, i) => {
       let text = `
@@ -106,4 +113,4 @@ const renderNews = (func, section) => {
   });
 };
 
-renderNews(getMovies, sectionNews);
+renderNews(getMovies, section);
