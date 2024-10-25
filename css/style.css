@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+.container {
+  background-color: rgba(220, 220, 220, 0.2);
+}
+
 
 .banniere {
   background: url("../ressources/movies-on-the-house.jpg");
@@ -20,11 +24,12 @@
 
 #search {
   position: absolute;
-  right: 40%;
+  right: 50%;
   top: 200px;
   border-radius: 15px;
   width: 15%;
   padding: 5px 10px;
+  transform: translate(50%, -50%);
 }
 
 .movies-container {
@@ -57,10 +62,11 @@
 
 .card-container {
   cursor: pointer;
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
   border-radius: 5px;
   margin-bottom: 30px;
-  box-shadow: 20px 20px 10px 0px rgba(0, 0, 0, 0.05);
+  /* box-shadow: 20px 20px 10px 0px rgba(0, 0, 0, 0.05); */
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .card-container a {
