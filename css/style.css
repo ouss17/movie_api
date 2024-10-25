@@ -112,7 +112,7 @@ body {
   border-top-width: 1px;
   border-top-style: solid;
   border-top-color: black;
-  top: 229px;
+  top: 215px;
   padding: 5px 10px;
   border-top: none;
   border-radius: 0 0px 15px 15px;
@@ -120,7 +120,7 @@ body {
   list-style-type: none;
   overflow-y: scroll;
   max-height: 500px;
-  transform: translate(50%, -50%);
+  transform: translate(50%);
 
 }
 
