@@ -13,17 +13,17 @@ const fetchApp = (url, options = {}) => {
 };
 
 const queryString = window.location.search;
-console.log(queryString);
+// console.log(queryString);
 const urlParams = new URLSearchParams(queryString);
 const movie = urlParams.get("id");
-console.log(movie);
+// console.log(movie);
 
 const getMovieDetail = (id) => {
   fetchApp(
     `https://api.themoviedb.org/3/movie/${id}?language=fr-FR`,
     options
   ).then((data) => {
-    console.log(data);
+    // console.log(data);
     const html = `<aside class="detail-movie">
             <img class="logo" src="https://media.themoviedb.org/t/p/w220_and_h330_face${data.poster_path}" alt="${data.title} poster" />
             <div class="genres"></div>
@@ -53,17 +53,17 @@ const getMovieDetail = (id) => {
       case parseFloat(data["vote_average"]) > 7:
         document.querySelector(".score").style.color = "green";
         document.querySelector(".score").style.borderColor = "green";
-        console.log(data.title, ">");
+        // console.log(data.title, ">");
         break;
       case parseFloat(data["vote_average"]) < 5:
         document.querySelector(".score").style.color = "red";
         document.querySelector(".score").style.borderColor = "red";
-        console.log(data.title, "<");
+        // console.log(data.title, "<");
         break;
       default:
         document.querySelector(".score").style.color = "black";
         document.querySelector(".score").style.borderColor = "black";
-        console.log(data.title, "=");
+      // console.log(data.title, "=");
     }
 
     const genres = document.querySelector(".genres");
@@ -109,8 +109,8 @@ const getSimilar = (id) => {
     options
   ).then((res) => {
     const section = document.querySelector(".similar");
-    console.log(res);
-    console.log(res.results, "res");
+    // console.log(res);
+    // console.log(res.results, "res");
     if (res.results.length > 0) {
       res.results.forEach((element, i) => {
         if (i < 13) {
